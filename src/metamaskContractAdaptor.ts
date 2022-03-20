@@ -112,23 +112,21 @@ export class MetamaskContractAdaptor extends EventEmitter{
     }
 
     public async checkPermissionToAccessAccounts () : Promise<Boolean> {
-        const self = this;
-        return new Promise((resolve, reject) => {
-            self.provider
-            .request({ method: 'eth_requestAccounts' })
-            .then(resolve(true))
-            .catch((error: { code: string; }) => {
-                if(error.code == MetamaskContractAdaptor.ERROR_CODES.METHOD_CANCELLED) {
-                    self.emit(MetamaskContractAdaptor.METHOD_CANCELLED, "checkPermissionToAccessAccounts");
-                } 
-        
-                if(error.code == MetamaskContractAdaptor.ERROR_CODES.ALREADY_METHOD_TRIGGERED) {
-                    self.emit(MetamaskContractAdaptor.ALREADY_METHOD_TRIGGERED, "checkPermissionToAccessAccounts");
-                } 
-                self.emit(MetamaskContractAdaptor.HAS_NOT_PERMISSION_TO_ACCESS_ACCOUNTS);
-                resolve(false)
-            });        
-        });
+        try {
+            var selectedAddress = await this.getSelectedAddress();
+            //console.log("selectedAddress" + selectedAddress);
+            return selectedAddress ? true : false;
+        } catch(error) {
+            if(error.code == MetamaskContractAdaptor.ERROR_CODES.METHOD_CANCELLED) {
+                this.emit(MetamaskContractAdaptor.METHOD_CANCELLED, "checkPermissionToAccessAccounts");
+            } 
+    
+            if(error.code == MetamaskContractAdaptor.ERROR_CODES.ALREADY_METHOD_TRIGGERED) {
+                this.emit(MetamaskContractAdaptor.ALREADY_METHOD_TRIGGERED, "checkPermissionToAccessAccounts");
+            } 
+            this.emit(MetamaskContractAdaptor.HAS_NOT_PERMISSION_TO_ACCESS_ACCOUNTS);
+            return false;
+        }
     }
 
 
@@ -202,6 +200,25 @@ export class MetamaskContractAdaptor extends EventEmitter{
 
     }
 
+
+    public async ecRecover(message : string, signature: string): Promise<string> {
+
+        var checkResult = await this.checkConnection()
+        if (!checkResult) {
+            return null;
+        }
+
+        return new Promise(async (resolve, reject)=>{
+            this.web3.eth.personal.ecRecover(message, signature, (error : Error, address: string) : void => {
+                if(error) {
+                    reject(error);
+                }
+                resolve(address);
+            })
+        })    
+
+    }
+
     public async getSelectedAddress() : Promise<string> {
         const accounts = await this.provider.request({ method: 'eth_requestAccounts' });
         if(accounts && accounts.length) {
@@ -266,13 +283,32 @@ export class MetamaskContractAdaptor extends EventEmitter{
         return checkResult;
 
     }
-        
+
+    //##################################################################################
+    //  ADMIN - CONTRACT METHODS (For Test)
+    //##################################################################################
+    public async mintFodr(to: string, amount: string) : Promise<any> {
+        return this.sendContractMethod(this.wildaloContract, "mintFodr", to, amount);
+    }
+
+    public async createCardBase(metedata: string) : Promise<any> {
+        return this.sendContractMethod(this.wildaloContract, "createCardBase", metedata);
+    }
+
+    public async mintCardWithBaseId(to: string, baseId: string) : Promise<any> {
+        return this.sendContractMethod(this.wildaloContract, "mintCardWithBaseId", to, baseId);
+    }
+
     //##################################################################################
     //  CONTRACT METHODS
     //##################################################################################
 
     public async upgradeCard(cardId: string, burnedCardId: string) : Promise<any> {
         return this.sendContractMethod(this.wildaloContract, "upgradeCard", cardId, burnedCardId);
+    }
+
+    public async buyPackage(packageType: string, currency: string) : Promise<any> {
+        return this.sendContractMethod(this.wildaloContract, "buyPackage", packageType, currency);
     }
 
     public async createAuction(currency : string, cardId : string, startPrice : string, endPrice : string, duration : string) : Promise<any> {
@@ -288,7 +324,7 @@ export class MetamaskContractAdaptor extends EventEmitter{
     }
 
     //TEST
-    public async store(number: number) : Promise<any> {
+    public async store(number: string)  : Promise<any> {
         return this.sendContractMethod(this.wildaloContract, "store", number);
     }
 

@@ -4,36 +4,68 @@
 <head>
     <title>Metamask Client Test</title>
     <link rel="shortcut icon" href="https://9gag.com/favicon.ico" />
-</head>g
-<style>
+
+    <style>
+        body {
+          background-color: #F0F0F0;
+          padding: 1em;
+          font-family: 'Raleway', 'Source Sans Pro', 'Arial';
+        }
+    
+        .container {
+          width: 50%;
+          margin: 0 auto;
+        }
+    
+        label {
+          display: block;
+          margin-bottom: 2px;
+        }
+    
+        input {
+          padding: 1em 1em;
+          width: 250px;
+          margin-bottom: 1em;
+        }
+    
+        button {
+          margin: 1em 0;
+          padding: 1em 1em;
+          width: 250px;
+          display: block;
+        }
+    
+        #loader {
+          width: 100px;
+          display: none;
+        }
+    
+        #instructor {
+          padding: 1em;
+          background-color: #fff;
+          margin: 1em 0;
+        }
+      </style>
+</head>
+<!-- <style>
     input {
         display: block;
         margin-bottom: 12px;
     }
-</style>
+</style> -->
 
 <body>
     <h1>Metamask Client Test</h1>
 
         <button onclick="checkMetamask()">checkMetamask</button>
-    </br>
         <button onclick="checkPermissionToAccessAccounts()">check PermissionToAccessAccounts</button>
-    </br>
         <button onclick="checkConnection()">CheckConnection</button>
-    </br>
         <button onclick="enablePermissionToAccessAccounts()">enablePermissionToAccessAccounts</button>
-    </br>
         <button onclick="sign()">Sign</button>
-    </br>
         <button onclick="getSelectedChainId()">getSelectedChainId</button>
-    </br>
         <button onclick="getSelectedAddress()">getSelectedAddress</button>
-    </br>
         <button onclick="getFordBudget()">getFordBudget</button>
-    </br>
         <button onclick="getWarcBudget()">getWarcBudget</button>
-    </br>
-
     </br>
     <!-- <button onclick="buyPackage()">buyPackage</button>
     </br>
@@ -43,10 +75,105 @@
     </br>
     <button onclick="bid()">bid</button>
     </br> -->
-    <button onclick="store()">store</button>
-    <button onclick="retrieve()">retrieve</button>
-    </br>
 
+    
+    <script language="Javascript">
+
+        //##################################################################################
+        //  ADMIN - CONTRACT METHODS (For Test)
+        //##################################################################################
+
+        async function mintFodr (form) {
+            console.log("to: " +  form.to.value +"  amount: " + form.amount.value)
+            await metamaskContractAdaptor.mintFodr(form.to.value, form.amount.value);
+        }
+
+        async function createCardBase (form) {
+            console.log("metedata: " +  form.metedata.value)
+            await metamaskContractAdaptor.createCardBase(form.metedata.value);
+        }
+
+        async function mintCardWithBaseId (form) {
+            console.log("to: " +  form.to.value +"  baseId: " + form.baseId.value)
+            await metamaskContractAdaptor.mintCardWithBaseId(form.to.value, form.baseId.value);
+        }
+
+            
+        //##################################################################################
+        //  CONTRACT METHODS
+        //##################################################################################
+        async function upgradeCard (form) {
+            console.log("cardId: " +  form.cardId.value +"  burnedCardId: " + form.burnedCardId.value)
+            await metamaskContractAdaptor.upgradeCard(form.cardId.value, form.burnedCardId.value);
+        }
+        async function buyPackage (form) {
+            console.log("packageType: " +  form.packageType.value +"  currency: " + form.currency.value)
+            await metamaskContractAdaptor.buyPackage(form.packageType.value, form.currency.value);
+        }
+        async function createAuction (form) {
+            console.log("currency: " +  form.currency.value +"  cardId: " + form.cardId.value +"  startPrice: " + form.startPrice.value +"  endPrice: " + form.endPrice.value +"  duration: " + form.duration.value)
+            await metamaskContractAdaptor.createAuction(form.currency.value, form.cardId.value, form.startPrice.value, form.endPrice.value, form.duration.value);
+        }
+        async function cancelAuction (form) {
+            console.log("cardId: " +  form.cardId.value)
+            await metamaskContractAdaptor.cancelAuction(form.cardId.value);
+        }
+        async function bid (form) {
+            console.log("cardId: " +  form.cardId.value)
+            await metamaskContractAdaptor.bid(form.cardId.value);
+        }
+    </script>
+    <h2>Contract Methods</h2>
+
+    <form>
+        <h3>mintFodr params: address(to), amount(fodr) </h3>
+        <input TYPE="button" name="button" value="mintFodr" onClick="mintFodr(this.form)">
+        <input TYPE="text" name="to" value="0x82Aa6D6e36D6ef72E16643F6D971fcC9D1D11608"></input>
+        <input TYPE="text" name="amount" value="10"></input>
+    </form>
+
+    <form>
+        <h3>createCardBase params: metedata(basecard) </h3>
+        <input TYPE="button" name="button" value="createCardBase" onClick="createCardBase(this.form)">
+        <input TYPE="text" name="metedata" value="0x11000000000140000000000000000000280000a0001400018000070000e"></input>
+    </form>
+    <form>
+        <h3>mintFodr params: address(to), baseId(card) </h3>
+        <input TYPE="button" name="button" value="mintCardWithBaseId" onClick="mintCardWithBaseId(this.form)">
+        <input TYPE="text" name="to" value="0x82Aa6D6e36D6ef72E16643F6D971fcC9D1D11608"></input>
+        <input TYPE="text" name="baseId" value="2"></input>
+    </form>
+    <form>
+        <h3>upgradeCard params: cardId(card), burnedCardId(card) </h3>
+        <input TYPE="button" name="button" value="upgradeCard" onClick="upgradeCard(this.form)">
+        <input TYPE="text" name="cardId" value="1"></input>
+        <input TYPE="text" name="burnedCardId" value="2"></input>
+    </form>
+    <form>
+        <h3>buyPackage params: packageType(1,2,3), currency(1,2) </h3>
+        <input TYPE="button" name="button" value="buyPackage" onClick="buyPackage(this.form)">
+        <input TYPE="text" name="packageType" value="1"></input>
+        <input TYPE="text" name="currency" value="2"></input>
+    </form>
+    <form>
+        <h3>createAuction params: currency(1,2), cardId(card), startPrice(avax, fodr), endPrice(avax, fodr), duration(sec), </h3>
+        <input TYPE="button" name="button" value="createAuction" onClick="createAuction(this.form)">
+        <input TYPE="text" name="currency" value="1"></input>
+        <input TYPE="text" name="cardId" value="2"></input>
+        <input TYPE="text" name="startPrice" value="2"></input>
+        <input TYPE="text" name="endPrice" value="2"></input>
+        <input TYPE="text" name="duration" value="2"></input>
+    </form>
+    <form>
+        <h3>cancelAuction params: cardId(card) </h3>
+        <input TYPE="button" name="button" value="cancelAuction" onClick="cancelAuction(this.form)">
+        <input TYPE="text" name="cardId" value="15"></input>
+    </form>
+    <form>
+        <h3>bid params: cardId(card) </h3>
+        <input TYPE="button" name="button" value="bid" onClick="bid(this.form)">
+        <input TYPE="text" name="cardId" value="15"></input>
+    </form>
     <script src="./dist/bundle.js"></script>
 </body>
 
