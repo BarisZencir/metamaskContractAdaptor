@@ -4,8 +4,7 @@ import { MetamaskContractAdaptor } from "./metamaskContractAdaptor";
 
 var metamaskContractAdaptor = new MetamaskContractAdaptor(
     "0xa869",
-    "0x0a133Fa08a7896aCe458f5e4F14Cc3437576C2f1",
-    [
+    "0x87D0b51965077814853e536E7deBa48b0FA270ed",[
       {
         "constant": false,
         "inputs": [
@@ -45,7 +44,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "name": "getApproved",
         "outputs": [
           {
-            "name": "_operator",
+            "name": "",
             "type": "address"
           }
         ],
@@ -242,7 +241,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "name": "exists",
         "outputs": [
           {
-            "name": "_exists",
+            "name": "",
             "type": "bool"
           }
         ],
@@ -316,7 +315,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "name": "ownerOf",
         "outputs": [
           {
-            "name": "_owner",
+            "name": "",
             "type": "address"
           }
         ],
@@ -335,7 +334,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "name": "balanceOf",
         "outputs": [
           {
-            "name": "_balance",
+            "name": "",
             "type": "uint256"
           }
         ],
@@ -350,6 +349,20 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -384,7 +397,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "constant": false,
         "inputs": [
           {
-            "name": "_operator",
+            "name": "_to",
             "type": "address"
           },
           {
@@ -440,6 +453,20 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
       },
       {
         "constant": true,
+        "inputs": [],
+        "name": "newOwner",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
         "inputs": [
           {
             "name": "_owner",
@@ -480,12 +507,29 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": true,
+            "name": "_from",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "name": "_to",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
             "name": "to",
             "type": "address"
           },
           {
             "indexed": false,
-            "name": "_amount",
+            "name": "amount",
             "type": "uint256"
           }
         ],
@@ -497,7 +541,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": false,
-            "name": "_metedata",
+            "name": "metedata",
             "type": "uint256"
           }
         ],
@@ -509,12 +553,12 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": true,
-            "name": "_to",
+            "name": "to",
             "type": "address"
           },
           {
             "indexed": false,
-            "name": "_baseId",
+            "name": "baseId",
             "type": "uint256"
           }
         ],
@@ -531,12 +575,12 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
           },
           {
             "indexed": false,
-            "name": "_cardId",
+            "name": "cardId",
             "type": "uint256"
           },
           {
             "indexed": false,
-            "name": "_burnedCardId",
+            "name": "burnedCardId",
             "type": "uint256"
           }
         ],
@@ -558,12 +602,12 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
           },
           {
             "indexed": false,
-            "name": "_packageType",
+            "name": "packageType",
             "type": "uint256"
           },
           {
             "indexed": false,
-            "name": "_currency",
+            "name": "currency",
             "type": "uint256"
           },
           {
@@ -585,27 +629,27 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
           },
           {
             "indexed": false,
-            "name": "_currency",
+            "name": "currency",
             "type": "uint256"
           },
           {
             "indexed": false,
-            "name": "_cardId",
+            "name": "cardId",
             "type": "uint256"
           },
           {
             "indexed": false,
-            "name": "_startPrice",
+            "name": "startPrice",
             "type": "uint256"
           },
           {
             "indexed": false,
-            "name": "_endPrice",
+            "name": "endPrice",
             "type": "uint256"
           },
           {
             "indexed": false,
-            "name": "_duration",
+            "name": "duration",
             "type": "uint256"
           }
         ],
@@ -622,7 +666,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
           },
           {
             "indexed": false,
-            "name": "_cardId",
+            "name": "cardId",
             "type": "uint256"
           }
         ],
@@ -644,7 +688,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
           },
           {
             "indexed": false,
-            "name": "_cardId",
+            "name": "cardId",
             "type": "uint256"
           }
         ],
@@ -656,12 +700,12 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": true,
-            "name": "_to",
+            "name": "to",
             "type": "address"
           },
           {
             "indexed": false,
-            "name": "_tokenId",
+            "name": "tokenId",
             "type": "uint256"
           }
         ],
@@ -673,7 +717,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": false,
-            "name": "_tokenId",
+            "name": "tokenId",
             "type": "uint256"
           }
         ],
@@ -685,34 +729,17 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": true,
-            "name": "_from",
+            "name": "from",
             "type": "address"
           },
           {
             "indexed": true,
-            "name": "_to",
-            "type": "address"
-          }
-        ],
-        "name": "OwnershipTransferred",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": true,
-            "name": "_from",
-            "type": "address"
-          },
-          {
-            "indexed": true,
-            "name": "_to",
+            "name": "to",
             "type": "address"
           },
           {
             "indexed": false,
-            "name": "_tokenId",
+            "name": "tokenId",
             "type": "uint256"
           }
         ],
@@ -724,17 +751,17 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": true,
-            "name": "_owner",
+            "name": "owner",
             "type": "address"
           },
           {
             "indexed": true,
-            "name": "_approved",
+            "name": "approved",
             "type": "address"
           },
           {
             "indexed": false,
-            "name": "_tokenId",
+            "name": "tokenId",
             "type": "uint256"
           }
         ],
@@ -746,17 +773,17 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "inputs": [
           {
             "indexed": true,
-            "name": "_owner",
+            "name": "owner",
             "type": "address"
           },
           {
             "indexed": true,
-            "name": "_operator",
+            "name": "operator",
             "type": "address"
           },
           {
             "indexed": false,
-            "name": "_approved",
+            "name": "approved",
             "type": "bool"
           }
         ],
@@ -980,15 +1007,6 @@ wind.checkConnection = async function () {
 wind.enablePermissionToAccessAccounts = async function () {
     var result = await metamaskContractAdaptor.enablePermissionToAccessAccounts()
     console.log("enablePermissionToAccessAccounts : " + result)
-}
-
-wind.sign = async function () {
-    try {
-        var result = await metamaskContractAdaptor.sign("Tested message.", "pass")
-        console.log("signed message: " + result);
-    } catch(error) {
-        console.log(error)
-    }
 }
 
 wind.getSelectedChainId = async function () {

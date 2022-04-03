@@ -182,7 +182,7 @@ export class MetamaskContractAdaptor extends EventEmitter{
 
     }
 
-    public async sign(message : string, password: string): Promise<string> {
+    public async sign(message : string): Promise<string> {
 
         var checkResult = await this.checkConnection()
         if (!checkResult) {
@@ -190,7 +190,7 @@ export class MetamaskContractAdaptor extends EventEmitter{
         }
 
         return new Promise(async (resolve, reject)=>{
-            this.web3.eth.personal.sign(message, await this.getSelectedAddress(), password ,(error : Error, signature: string) : void => {
+            this.web3.eth.personal.sign(message, await this.getSelectedAddress(), "wildalo" ,(error : Error, signature: string) : void => {
                 if(error) {
                     reject(error);
                 }

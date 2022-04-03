@@ -61,7 +61,6 @@
         <button onclick="checkPermissionToAccessAccounts()">check PermissionToAccessAccounts</button>
         <button onclick="checkConnection()">CheckConnection</button>
         <button onclick="enablePermissionToAccessAccounts()">enablePermissionToAccessAccounts</button>
-        <button onclick="sign()">Sign</button>
         <button onclick="getSelectedChainId()">getSelectedChainId</button>
         <button onclick="getSelectedAddress()">getSelectedAddress</button>
         <button onclick="getFordBudget()">getFordBudget</button>
@@ -78,6 +77,12 @@
 
     
     <script language="Javascript">
+
+        async function sign (form) {
+            console.log("nonce: " +  form.nonce.value)
+            let signature = await metamaskContractAdaptor.sign(form.nonce.value);
+            console.log("signature: " + signature);
+        }
 
         //##################################################################################
         //  ADMIN - CONTRACT METHODS (For Test)
@@ -123,6 +128,15 @@
             await metamaskContractAdaptor.bid(form.cardId.value);
         }
     </script>
+
+    <h2>Signature</h2>
+
+    <form>
+        <h3>sign params: nonce</h3>
+        <input TYPE="button" name="button" value="sign" onClick="sign(this.form)">
+        <input TYPE="text" name="nonce" value="1"></input>
+    </form>
+
     <h2>Contract Methods</h2>
 
     <form>
