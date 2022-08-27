@@ -32,18 +32,19 @@ export class MetamaskContractAdaptor extends EventEmitter{
     private provider: any
     private web3: Web3;
     private wildaloContract: Contract;
-    // private warcContract: Contract;
-    // private fodrContract: Contract;
+    private warcContract: Contract;
+    private fodrContract: Contract;
     private isFoundMetamask = false;
 
     constructor(
         private targetChainId: string, 
         wildaloContractAddress: string,
         wildaloContractJson : any, 
-        // WarcContractAddress: string,
-        // WarcContractJson : any, 
-        // FodrContractAddress: string,
-        // FodrContractJson : any, 
+        WarcContractAddress: string,
+        WarcContractJson : any, 
+        FodrContractAddress: string,
+        FodrContractJson : any,
+        private repositoryContractAddress: string
     ) {
         super();
 
@@ -56,8 +57,8 @@ export class MetamaskContractAdaptor extends EventEmitter{
         this.web3 = new Web3(this.provider)
         
         this.wildaloContract = new this.web3.eth.Contract(wildaloContractJson, wildaloContractAddress);
-        // this.warcContract = new this.web3.eth.Contract(WarcContractJson, WarcContractAddress);
-        // this.fodrContract = new this.web3.eth.Contract(FodrContractJson, FodrContractAddress);
+        this.warcContract = new this.web3.eth.Contract(WarcContractJson, WarcContractAddress);
+        this.fodrContract = new this.web3.eth.Contract(FodrContractJson, FodrContractAddress);
 
 
         if(this.provider) {
@@ -102,7 +103,7 @@ export class MetamaskContractAdaptor extends EventEmitter{
     public checkNetwork () : Boolean {
         const self = this
         // console.log("self.provider.chainId: " + self.provider.chainId);
-        // console.log("self.targetChainId: " + self.chainId);
+        // console.log("self.targetChainId: " + self.targetChainId);
 
         if (self.provider.chainId != self.targetChainId) {
             self.emit(MetamaskContractAdaptor.WRONG_NETWORK);
@@ -230,25 +231,6 @@ export class MetamaskContractAdaptor extends EventEmitter{
         return this.provider.chainId;
     }
 
-
-    public async getFordBudget() : Promise<String> {
-        var checkResult = await this.checkConnection()
-        if (!checkResult) {
-            return null;
-        }
-        return "250000000000000";
-
-    }
-
-    public async getWarcBudget() : Promise<String> {
-        var checkResult = await this.checkConnection()
-        if (!checkResult) {
-            return null;
-        }
-        return "120000000000000";
-
-    }
-
     private async sendContractMethod(contract : Contract, method: string, ...args : any[]) : Promise<string | Boolean> {
         var checkResult = await this.checkConnection()
         if (checkResult) {
@@ -267,7 +249,28 @@ export class MetamaskContractAdaptor extends EventEmitter{
         return checkResult;
 
     }
-        
+
+    
+    private async sendByValueContractMethod(contract : Contract, method: string, value: string, ...args : any[]) : Promise<string | Boolean> {
+        var checkResult = await this.checkConnection()
+        if (checkResult) {
+            let from = await this.getSelectedAddress();
+            return new Promise((resolve, reject)=> {
+                contract.methods[method](...args).send({
+                    from: from,
+                    value: value
+                   }, (error: Error, transactionHash : string) => {
+                    if(error) {
+                        reject(error);
+                    }
+                    resolve(transactionHash);
+                   });                
+            })
+        }
+        return checkResult;
+
+    }
+
     private async callContractMethod(contract : Contract, method: string, ...args : any[]) : Promise<string | Boolean> {
         var checkResult = await this.checkConnection()
         if (checkResult) {
@@ -307,8 +310,12 @@ export class MetamaskContractAdaptor extends EventEmitter{
         return this.sendContractMethod(this.wildaloContract, "upgradeCard", cardId, burnedCardId);
     }
 
+    public async getPackagePrice(packageType: string, currency: string): Promise<any> {
+        return this.callContractMethod(this.wildaloContract, "getPackagePrice", packageType, currency);
+    }
+
     public async buyPackage(packageType: string, currency: string) : Promise<any> {
-        return this.sendContractMethod(this.wildaloContract, "buyPackage", packageType, currency);
+        return this.sendByValueContractMethod(this.wildaloContract, "buyPackage", "100000000000000", packageType, currency);
     }
 
     public async createAuction(currency : string, cardId : string, startPrice : string, endPrice : string, duration : string) : Promise<any> {
@@ -320,16 +327,39 @@ export class MetamaskContractAdaptor extends EventEmitter{
     }
 
     public async bid(cardId: string) : Promise<any> {
-        return this.sendContractMethod(this.wildaloContract, "bid", cardId);
+        return this.sendByValueContractMethod(this.wildaloContract, "bid", "10000000000000", cardId);
     }
 
-    //TEST
-    public async store(number: string)  : Promise<any> {
-        return this.sendContractMethod(this.wildaloContract, "store", number);
+    public async getCardInfo(cardId: string): Promise<any> {
+        return this.callContractMethod(this.wildaloContract, "getCardInfo", cardId);
+    }
+    
+
+    // ##################################################################################
+    //    fodrContract
+    // ##################################################################################
+
+    public async getFordBudget(): Promise<any> {
+        const from = await this.getSelectedAddress();
+        return this.callContractMethod(this.fodrContract, "balanceOf", from);
+    }    
+
+    public async approveFodr(value: string): Promise<any> {
+        return this.sendContractMethod(this.fodrContract, 'approve', this.repositoryContractAddress, value);
     }
 
-    public async retrieve() : Promise<any> {
-        return this.callContractMethod(this.wildaloContract, "retrieve");
+    public async allowanceFodr(): Promise<any> {
+        const from = await this.getSelectedAddress();
+        return this.callContractMethod(this.fodrContract, 'allowance', from, this.repositoryContractAddress);
+    }
+
+    // ##################################################################################
+    //    warcContract
+    // ##################################################################################
+
+    public async getWarcBudget(): Promise<any> {
+        const from = await this.getSelectedAddress();
+        return this.callContractMethod(this.warcContract, "balanceOf", from);
     }
 
 }

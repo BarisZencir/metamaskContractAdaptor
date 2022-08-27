@@ -66,22 +66,23 @@
         <button onclick="getFordBudget()">getFordBudget</button>
         <button onclick="getWarcBudget()">getWarcBudget</button>
     </br>
-    <!-- <button onclick="buyPackage()">buyPackage</button>
-    </br>
-    <button onclick="createAuction()">createAuction</button>
-    </br>
-    <button onclick="cancelAuction()">cancelAuction</button>
-    </br>
-    <button onclick="bid()">bid</button>
-    </br> -->
 
-    
     <script language="Javascript">
 
         async function sign (form) {
             console.log("nonce: " +  form.nonce.value)
             let signature = await metamaskContractAdaptor.sign(form.nonce.value);
             console.log("signature: " + signature);
+        }
+
+        async function approveFodr (form) {
+            console.log("amount: " +  form.amount.value)
+            await metamaskContractAdaptor.approveFodr(form.amount.value);
+        }
+
+        async function allowanceFodr (form) {
+            let allowance = await metamaskContractAdaptor.allowanceFodr();
+            console.log("allowance: " + allowance);
         }
 
         //##################################################################################
@@ -107,10 +108,21 @@
         //##################################################################################
         //  CONTRACT METHODS
         //##################################################################################
+        async function getCardInfo (form) {
+            let cardInfo = await metamaskContractAdaptor.getCardInfo(form.cardId.value);
+            console.log("cardInfo: " + cardInfo);
+        }
+        
         async function upgradeCard (form) {
             console.log("cardId: " +  form.cardId.value +"  burnedCardId: " + form.burnedCardId.value)
             await metamaskContractAdaptor.upgradeCard(form.cardId.value, form.burnedCardId.value);
         }
+
+        async function getPackagePrice (form) {
+            let packagePrice = await metamaskContractAdaptor.getPackagePrice(form.packageType.value, form.currency.value);
+            console.log("packagePrice: " + packagePrice);
+        }
+
         async function buyPackage (form) {
             console.log("packageType: " +  form.packageType.value +"  currency: " + form.currency.value)
             await metamaskContractAdaptor.buyPackage(form.packageType.value, form.currency.value);
@@ -137,6 +149,19 @@
         <input TYPE="text" name="nonce" value="1"></input>
     </form>
 
+    <h2>FODR</h2>
+
+    <form>
+        <h3>approve fodr params: amount</h3>
+        <input TYPE="button" name="button" value="approveFodr" onClick="approveFodr(this.form)">
+        <input TYPE="text" name="amount" value="100"></input>
+    </form>
+
+    <form>
+        <h3>get allowance fodr(logs to console)</h3>
+        <input TYPE="button" name="button" value="allowanceFodr" onClick="allowanceFodr(this.form)">
+    </form>
+
     <h2>Contract Methods</h2>
 
     <form>
@@ -152,7 +177,7 @@
         <input TYPE="text" name="metedata" value="0x11000000000140000000000000000000280000a0001400018000070000e"></input>
     </form>
     <form>
-        <h3>mintFodr params: address(to), baseId(card) </h3>
+        <h3>mintCardWithBaseId params: address(to), baseId(card) </h3>
         <input TYPE="button" name="button" value="mintCardWithBaseId" onClick="mintCardWithBaseId(this.form)">
         <input TYPE="text" name="to" value="0x82Aa6D6e36D6ef72E16643F6D971fcC9D1D11608"></input>
         <input TYPE="text" name="baseId" value="2"></input>
@@ -164,10 +189,16 @@
         <input TYPE="text" name="burnedCardId" value="2"></input>
     </form>
     <form>
+        <h3>getPackagePrice params: packageType(1,2,3), currency(1,2) </h3>
+        <input TYPE="button" name="button" value="getPackagePrice" onClick="getPackagePrice(this.form)">
+        <input TYPE="text" name="packageType" value="1"></input>
+        <input TYPE="text" name="currency" value="1"></input>
+    </form>
+    <form>
         <h3>buyPackage params: packageType(1,2,3), currency(1,2) </h3>
         <input TYPE="button" name="button" value="buyPackage" onClick="buyPackage(this.form)">
         <input TYPE="text" name="packageType" value="1"></input>
-        <input TYPE="text" name="currency" value="2"></input>
+        <input TYPE="text" name="currency" value="1"></input>
     </form>
     <form>
         <h3>createAuction params: currency(1,2), cardId(card), startPrice(avax, fodr), endPrice(avax, fodr), duration(sec), </h3>
@@ -188,6 +219,13 @@
         <input TYPE="button" name="button" value="bid" onClick="bid(this.form)">
         <input TYPE="text" name="cardId" value="15"></input>
     </form>
+
+    <form>
+        <h3>getCardInfo params: cardId(card) </h3>
+        <input TYPE="button" name="button" value="getCardInfo" onClick="getCardInfo(this.form)">
+        <input TYPE="text" name="cardId" value="15"></input>
+    </form>
+
     <script src="./dist/bundle.js"></script>
 </body>
 

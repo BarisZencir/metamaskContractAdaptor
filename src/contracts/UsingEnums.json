@@ -1,0 +1,613 @@
+{
+  "contractName": "UsingEnums",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.4.25+commit.59dbf8f1\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Enums.sol\":\"UsingEnums\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Enums.sol\":{\"keccak256\":\"0xfaf95e33651a16de1d120183e249c6c0c93897825b3d612ae790e1e49a7eaa26\",\"urls\":[\"bzzr://560ed34411741409bc9deea2575cca394015fa945708fe06a1ea49bdb2d5307b\"]},\"project:/contracts/Interfaces.sol\":{\"keccak256\":\"0x16931e5fae6f1abdd0e09169a8b8d195216b4f8bf4d10715e04ff4bf15fbecbe\",\"urls\":[\"bzzr://944e9f39155dc542cd3ac1f6f2af87fa0f391dac0a5edda6e342ac8264c77c2d\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058203df54aae4e382abe28229c7f88c7f0e2fd83737a1e3a3b47cca4114fd75a1aac0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058203df54aae4e382abe28229c7f88c7f0e2fd83737a1e3a3b47cca4114fd75a1aac0029",
+  "sourceMap": "59:601:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:601:5;;;;;;;",
+  "deployedSourceMap": "59:601:5:-;;;;;",
+  "source": "pragma solidity ^ 0.4.25;\r\n\r\nimport './Interfaces.sol';\r\n\r\ncontract UsingEnums is IUsingEnums {\r\n\r\n    enum Data {\r\n        NOT_EXIST\r\n    }\r\n\r\n    enum Levels {\r\n        NOT_EXIST,\r\n        LEVEL_1,\r\n        LEVEL_2,\r\n        LEVEL_3,\r\n        LEVEL_4,\r\n        LEVEL_5,\r\n        LEVEL_6,\r\n        LEVEL_7,\r\n        LEVEL_8,\r\n        LEVEL_9,\r\n        LEVEL_10,\r\n        LEVEL_11,\r\n        LEVEL_12,\r\n        LEVEL_13,\r\n        LEVEL_14,\r\n        LEVEL_15\r\n    }\r\n\r\n    enum Rarity {\r\n        NOT_EXIST,\r\n        COMMON,\r\n        RARE,\r\n        EXOTIC\r\n    }\r\n\r\n    enum CurrencyType {\r\n        NOT_EXIST,\r\n        AVAX,\r\n        FODR,\r\n        WARC\r\n    }\r\n}",
+  "sourcePath": "C:\\wildalo\\wildalo-contract-dev\\contracts\\Enums.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/Enums.sol",
+    "exportedSymbols": {
+      "UsingEnums": [
+        3123
+      ]
+    },
+    "id": 3124,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3090,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".25"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:25:5"
+      },
+      {
+        "absolutePath": "project:/contracts/Interfaces.sol",
+        "file": "./Interfaces.sol",
+        "id": 3091,
+        "nodeType": "ImportDirective",
+        "scope": 3124,
+        "sourceUnit": 5647,
+        "src": "29:26:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3092,
+              "name": "IUsingEnums",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4471,
+              "src": "82:11:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IUsingEnums_$4471",
+                "typeString": "contract IUsingEnums"
+              }
+            },
+            "id": 3093,
+            "nodeType": "InheritanceSpecifier",
+            "src": "82:11:5"
+          }
+        ],
+        "contractDependencies": [
+          4471
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3123,
+        "linearizedBaseContracts": [
+          3123,
+          4471
+        ],
+        "name": "UsingEnums",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "UsingEnums.Data",
+            "id": 3095,
+            "members": [
+              {
+                "id": 3094,
+                "name": "NOT_EXIST",
+                "nodeType": "EnumValue",
+                "src": "124:9:5"
+              }
+            ],
+            "name": "Data",
+            "nodeType": "EnumDefinition",
+            "src": "103:37:5"
+          },
+          {
+            "canonicalName": "UsingEnums.Levels",
+            "id": 3112,
+            "members": [
+              {
+                "id": 3096,
+                "name": "NOT_EXIST",
+                "nodeType": "EnumValue",
+                "src": "171:9:5"
+              },
+              {
+                "id": 3097,
+                "name": "LEVEL_1",
+                "nodeType": "EnumValue",
+                "src": "191:7:5"
+              },
+              {
+                "id": 3098,
+                "name": "LEVEL_2",
+                "nodeType": "EnumValue",
+                "src": "209:7:5"
+              },
+              {
+                "id": 3099,
+                "name": "LEVEL_3",
+                "nodeType": "EnumValue",
+                "src": "227:7:5"
+              },
+              {
+                "id": 3100,
+                "name": "LEVEL_4",
+                "nodeType": "EnumValue",
+                "src": "245:7:5"
+              },
+              {
+                "id": 3101,
+                "name": "LEVEL_5",
+                "nodeType": "EnumValue",
+                "src": "263:7:5"
+              },
+              {
+                "id": 3102,
+                "name": "LEVEL_6",
+                "nodeType": "EnumValue",
+                "src": "281:7:5"
+              },
+              {
+                "id": 3103,
+                "name": "LEVEL_7",
+                "nodeType": "EnumValue",
+                "src": "299:7:5"
+              },
+              {
+                "id": 3104,
+                "name": "LEVEL_8",
+                "nodeType": "EnumValue",
+                "src": "317:7:5"
+              },
+              {
+                "id": 3105,
+                "name": "LEVEL_9",
+                "nodeType": "EnumValue",
+                "src": "335:7:5"
+              },
+              {
+                "id": 3106,
+                "name": "LEVEL_10",
+                "nodeType": "EnumValue",
+                "src": "353:8:5"
+              },
+              {
+                "id": 3107,
+                "name": "LEVEL_11",
+                "nodeType": "EnumValue",
+                "src": "372:8:5"
+              },
+              {
+                "id": 3108,
+                "name": "LEVEL_12",
+                "nodeType": "EnumValue",
+                "src": "391:8:5"
+              },
+              {
+                "id": 3109,
+                "name": "LEVEL_13",
+                "nodeType": "EnumValue",
+                "src": "410:8:5"
+              },
+              {
+                "id": 3110,
+                "name": "LEVEL_14",
+                "nodeType": "EnumValue",
+                "src": "429:8:5"
+              },
+              {
+                "id": 3111,
+                "name": "LEVEL_15",
+                "nodeType": "EnumValue",
+                "src": "448:8:5"
+              }
+            ],
+            "name": "Levels",
+            "nodeType": "EnumDefinition",
+            "src": "148:315:5"
+          },
+          {
+            "canonicalName": "UsingEnums.Rarity",
+            "id": 3117,
+            "members": [
+              {
+                "id": 3113,
+                "name": "NOT_EXIST",
+                "nodeType": "EnumValue",
+                "src": "494:9:5"
+              },
+              {
+                "id": 3114,
+                "name": "COMMON",
+                "nodeType": "EnumValue",
+                "src": "514:6:5"
+              },
+              {
+                "id": 3115,
+                "name": "RARE",
+                "nodeType": "EnumValue",
+                "src": "531:4:5"
+              },
+              {
+                "id": 3116,
+                "name": "EXOTIC",
+                "nodeType": "EnumValue",
+                "src": "546:6:5"
+              }
+            ],
+            "name": "Rarity",
+            "nodeType": "EnumDefinition",
+            "src": "471:88:5"
+          },
+          {
+            "canonicalName": "UsingEnums.CurrencyType",
+            "id": 3122,
+            "members": [
+              {
+                "id": 3118,
+                "name": "NOT_EXIST",
+                "nodeType": "EnumValue",
+                "src": "596:9:5"
+              },
+              {
+                "id": 3119,
+                "name": "AVAX",
+                "nodeType": "EnumValue",
+                "src": "616:4:5"
+              },
+              {
+                "id": 3120,
+                "name": "FODR",
+                "nodeType": "EnumValue",
+                "src": "631:4:5"
+              },
+              {
+                "id": 3121,
+                "name": "WARC",
+                "nodeType": "EnumValue",
+                "src": "646:4:5"
+              }
+            ],
+            "name": "CurrencyType",
+            "nodeType": "EnumDefinition",
+            "src": "567:90:5"
+          }
+        ],
+        "scope": 3124,
+        "src": "59:601:5"
+      }
+    ],
+    "src": "0:660:5"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/Enums.sol",
+      "exportedSymbols": {
+        "UsingEnums": [
+          3123
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".25"
+          ]
+        },
+        "id": 3090,
+        "name": "PragmaDirective",
+        "src": "0:25:5"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 5647,
+          "absolutePath": "project:/contracts/Interfaces.sol",
+          "file": "./Interfaces.sol",
+          "scope": 3124,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 3091,
+        "name": "ImportDirective",
+        "src": "29:26:5"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            4471
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            3123,
+            4471
+          ],
+          "name": "UsingEnums",
+          "scope": 3124
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": null
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IUsingEnums",
+                  "referencedDeclaration": 4471,
+                  "type": "contract IUsingEnums"
+                },
+                "id": 3092,
+                "name": "UserDefinedTypeName",
+                "src": "82:11:5"
+              }
+            ],
+            "id": 3093,
+            "name": "InheritanceSpecifier",
+            "src": "82:11:5"
+          },
+          {
+            "attributes": {
+              "canonicalName": "UsingEnums.Data",
+              "name": "Data"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "NOT_EXIST"
+                },
+                "id": 3094,
+                "name": "EnumValue",
+                "src": "124:9:5"
+              }
+            ],
+            "id": 3095,
+            "name": "EnumDefinition",
+            "src": "103:37:5"
+          },
+          {
+            "attributes": {
+              "canonicalName": "UsingEnums.Levels",
+              "name": "Levels"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "NOT_EXIST"
+                },
+                "id": 3096,
+                "name": "EnumValue",
+                "src": "171:9:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_1"
+                },
+                "id": 3097,
+                "name": "EnumValue",
+                "src": "191:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_2"
+                },
+                "id": 3098,
+                "name": "EnumValue",
+                "src": "209:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_3"
+                },
+                "id": 3099,
+                "name": "EnumValue",
+                "src": "227:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_4"
+                },
+                "id": 3100,
+                "name": "EnumValue",
+                "src": "245:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_5"
+                },
+                "id": 3101,
+                "name": "EnumValue",
+                "src": "263:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_6"
+                },
+                "id": 3102,
+                "name": "EnumValue",
+                "src": "281:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_7"
+                },
+                "id": 3103,
+                "name": "EnumValue",
+                "src": "299:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_8"
+                },
+                "id": 3104,
+                "name": "EnumValue",
+                "src": "317:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_9"
+                },
+                "id": 3105,
+                "name": "EnumValue",
+                "src": "335:7:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_10"
+                },
+                "id": 3106,
+                "name": "EnumValue",
+                "src": "353:8:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_11"
+                },
+                "id": 3107,
+                "name": "EnumValue",
+                "src": "372:8:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_12"
+                },
+                "id": 3108,
+                "name": "EnumValue",
+                "src": "391:8:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_13"
+                },
+                "id": 3109,
+                "name": "EnumValue",
+                "src": "410:8:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_14"
+                },
+                "id": 3110,
+                "name": "EnumValue",
+                "src": "429:8:5"
+              },
+              {
+                "attributes": {
+                  "name": "LEVEL_15"
+                },
+                "id": 3111,
+                "name": "EnumValue",
+                "src": "448:8:5"
+              }
+            ],
+            "id": 3112,
+            "name": "EnumDefinition",
+            "src": "148:315:5"
+          },
+          {
+            "attributes": {
+              "canonicalName": "UsingEnums.Rarity",
+              "name": "Rarity"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "NOT_EXIST"
+                },
+                "id": 3113,
+                "name": "EnumValue",
+                "src": "494:9:5"
+              },
+              {
+                "attributes": {
+                  "name": "COMMON"
+                },
+                "id": 3114,
+                "name": "EnumValue",
+                "src": "514:6:5"
+              },
+              {
+                "attributes": {
+                  "name": "RARE"
+                },
+                "id": 3115,
+                "name": "EnumValue",
+                "src": "531:4:5"
+              },
+              {
+                "attributes": {
+                  "name": "EXOTIC"
+                },
+                "id": 3116,
+                "name": "EnumValue",
+                "src": "546:6:5"
+              }
+            ],
+            "id": 3117,
+            "name": "EnumDefinition",
+            "src": "471:88:5"
+          },
+          {
+            "attributes": {
+              "canonicalName": "UsingEnums.CurrencyType",
+              "name": "CurrencyType"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "NOT_EXIST"
+                },
+                "id": 3118,
+                "name": "EnumValue",
+                "src": "596:9:5"
+              },
+              {
+                "attributes": {
+                  "name": "AVAX"
+                },
+                "id": 3119,
+                "name": "EnumValue",
+                "src": "616:4:5"
+              },
+              {
+                "attributes": {
+                  "name": "FODR"
+                },
+                "id": 3120,
+                "name": "EnumValue",
+                "src": "631:4:5"
+              },
+              {
+                "attributes": {
+                  "name": "WARC"
+                },
+                "id": 3121,
+                "name": "EnumValue",
+                "src": "646:4:5"
+              }
+            ],
+            "id": 3122,
+            "name": "EnumDefinition",
+            "src": "567:90:5"
+          }
+        ],
+        "id": 3123,
+        "name": "ContractDefinition",
+        "src": "59:601:5"
+      }
+    ],
+    "id": 3124,
+    "name": "SourceUnit",
+    "src": "0:660:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.25+commit.59dbf8f1.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.5",
+  "updatedAt": "2022-07-03T12:50:41.963Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
