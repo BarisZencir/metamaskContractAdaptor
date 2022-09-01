@@ -4,7 +4,7 @@ import { MetamaskContractAdaptor } from "./metamaskContractAdaptor";
 
 var metamaskContractAdaptor = new MetamaskContractAdaptor(
     "0x7e4",
-    "0xdAb866061cF5B880d4Bc40220CcD2A05d789471d", [
+    "0x3Be6b045a51b6110136b97568ca45cdDA0a2099b", [
       {
         "constant": false,
         "inputs": [
@@ -1069,7 +1069,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "type": "function"
       }
     ],
-    "0x0DaEA15e3eE8Fd08f35F2846007C5777999696C3", [
+    "0x9e8a0ffa91eF9109911F79b5a895A26F43D0e5FA", [
       {
         "constant": true,
         "inputs": [],
@@ -1489,7 +1489,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "type": "function"
       }
     ],
-    "0x2B5c9BE646DC62c3a5f85AB97221c9263edE3603", [
+    "0xCf498Ab6B09F13A479B16fe0445da76e8BF77879", [
       {
         "constant": true,
         "inputs": [],
@@ -1945,7 +1945,7 @@ var metamaskContractAdaptor = new MetamaskContractAdaptor(
         "type": "function"
       }
     ],
-    "0x85290382D40e54D8D561a63B0d99c4c77f68F114"
+    "0x5Ea9e30f061Ba27911F6d21d084a16B22F036C9F"
 );
 
 
